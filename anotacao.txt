@@ -1,0 +1,6 @@
+SuperUsuario: rodrigosantos
+email: clp.freelance@gmail.com
+senha: sgo2025
+
+
+SGO - Sistema de Gerenciamento Ocupacional.

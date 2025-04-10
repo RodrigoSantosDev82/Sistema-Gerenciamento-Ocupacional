@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="titulo mb-4">Setores</div>
+
+<form name="form" id="form" class="form-horizontal" method="GET" action="{% url 'setor_search' %}">
+    <div class="form-group row">
+        <label for="search" class="col-sm-2 col-form-label">Setor:</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control form-control-lg" name="search" id="search" placeholder="Digite o Setor para pesquisar">
+        </div>
+        <div class="col-sm-2">
+            <button id="search-btn" type="submit" class="btn btn-primary w-100">
+                <span class="bi bi-search" style="margin-left: 5px; font-size: 18px;"></span> Pesquisar
+            </button>
+        </div>
+    </div>
+
+    <!-- Botão Novo Setor -->
+    <div class="botoes mt-3">
+        <div class="form-group text-center">
+            <a href="{% url 'setor_novo' %}" class="btn btn-success btn-lg">
+                <span class="bi bi-plus-circle" style="margin-left: 5px; font-size: 18px;"></span> Novo Setor
+            </a>
+        </div>
+    </div>
+
+    <!-- Mensagens de Alerta -->
+    {% if messages %}
+    <div class="alert alert-warning mt-3">
+        {% for m in messages %}
+            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Tabela de Setores -->
+    <div class="form2 mt-4">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>SETOR</th>
+                    <th width="50" class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for setor in setores %}
+                <tr>
+                    <td>{{ setor.nome }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'setor_update' setor.id %}" class="btn btn-warning btn-sm">
+                            <span class="bi bi-pencil-square" style="font-size: 18px;"></span> Editar
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginação -->
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>
+            {% if setores.has_previous %}
+                <a href="?page={{ setores.previous_page_number }}" class="btn btn-outline-primary btn-sm">
+                    <span class="bi bi-arrow-left-circle" style="font-size: 18px;"></span> Anterior
+                </a>
+            {% endif %}
+        </div>
+        <div>
+            Página {{ setores.number }} de {{ setores.paginator.num_pages }}
+        </div>
+        <div>
+            {% if setores.has_next %}
+                <a href="?page={{ setores.next_page_number }}" class="btn btn-outline-primary btn-sm">
+                    <span class="bi bi-arrow-right-circle" style="font-size: 18px;"></span> Próxima
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</form>
+
+{% endblock %}

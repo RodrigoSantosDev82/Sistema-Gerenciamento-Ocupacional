@@ -1,0 +1,125 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gerenciamento Ocupacional</title>
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+
+    <!-- jQuery (necessário para o jQuery Mask Plugin) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/jquery.mask.min.js' %}"></script> <!-- Máscara de entrada -->
+</head>
+
+{% block grafico%}
+{% endblock %}
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Cabeçalho -->
+    <header class="bg-primary text-white py-3">
+        <div class="container">
+            <h1>Sistema de Gerenciamento Ocupacional</h1>
+        </div>
+    </header>
+
+    <div class="container flex-grow-1">
+        <!-- Navegação -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/home">Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Tabelas Básicas
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/lista_funcoes">Funções</a></li>
+                                <li><a class="dropdown-item" href="/lista_setores">Setores</a></li>
+                                <li><a class="dropdown-item" href="/lista_tiporiscos">Tipos de Riscos</a></li>
+                                <li><a class="dropdown-item" href="/lista_riscos">Riscos</a></li>
+                                <li><a class="dropdown-item" href="/lista_exames">Exames</a></li>
+                                <li><a class="dropdown-item" href="/lista_grupos">Grupos Homogêneos</a></li>
+                                <li><a class="dropdown-item" href="/lista_treinamentos">Treinamentos</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-bs-toggle="dropdown">
+                                Cadastros
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/lista_empregados">Empregados</a></li>
+                                <li><a class="dropdown-item" href="/lista_coords">Coordenador PCMSO</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'lista_atendimentos' %}">Atendimentos</a>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Treinamentos</a>
+                        </li> 
+        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/alterar_senha">Alterar senha</a>
+                        </li>
+                    </ul>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accounts/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Conteúdo -->
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        <h4>Todos os direitos reservados</h4>
+        <p style="font-size: 0.8rem;">by Rodrigo Santos</p>
+    </footer>
+
+    <!-- Bootstrap 5 JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <!-- Custom JS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Máscara para CPF (000.000.000-00)
+            $("#cpf").mask("000.000.000-00");
+
+            // Máscaras para Data (00/00/0000)
+            $("#data_atendimento").mask("00/00/0000");
+            $("#data_lancamento_certificado").mask("00/00/0000");
+            $("#data_nascimento").mask("00/00/0000");
+            $("#data_admissao").mask("00/00/0000");
+            $("#data_demissao").mask("00/00/0000");
+            $("#data").mask("00/00/0000");
+            $("#cpf").mask("000.000.000-00");
+        });
+    </script>
+</body>
+</html>

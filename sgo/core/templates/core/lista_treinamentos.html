@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Botão Novo Treinamento -->
+    <div class="botoes mb-3">
+        <div class="form-group text-center">
+            <a href="{% url 'treinamento_novo' %}" class="btn btn-success btn-lg">
+                <span class="bi bi-plus-circle" style="font-size: 18px;"></span> Novo Treinamento
+            </a>
+        </div>
+    </div>
+
+    <!-- Mensagens de Alerta -->
+    {% if messages %}
+    <div class="alert alert-warning mt-3">
+        {% for m in messages %}
+            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Tabela de Treinamentos -->
+    <div>
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>TREINAMENTO</th>
+                    <th>VALIDADE</th>
+                    <th width="50" class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for treinamento in treinamentos %}
+                <tr>
+                    <td>{{ treinamento.nome }}</td>
+                    <td>{{ treinamento.validade }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'treinamento_update' treinamento.id %}" class="btn btn-warning btn-sm">
+                            <span class="bi bi-pencil-square" style="font-size: 18px;"></span> Editar
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</form>
+
+{% endblock %}

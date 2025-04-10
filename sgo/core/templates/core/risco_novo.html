@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="titulo mb-4">Cadastrar Risco</div>
+
+<form name="form" id="form" class="form-horizontal" method="post" action="">
+    {% csrf_token %}
+    
+    <!-- Campo Nome do Risco -->
+    <div class="form2">
+        <div class="form-group row">
+            <label for="id_nome" class="col-sm-3 col-form-label">Risco:</label>
+            <div class="col-sm-8">
+                <input type="text" name="nome" maxlength="50" required id="id_nome" class="form-control form-control-lg" placeholder="Digite o nome do risco">
+            </div>
+        </div>
+
+        <!-- Campo Tipo de Risco -->
+        <div class="form-group row">
+            <label for="id_tiporisco" class="col-sm-3 col-form-label">Tipo de Risco:</label>
+            <div class="col-sm-8">
+                <select name="tiporisco" required id="id_tiporisco" class="form-control form-control-lg">
+                    <option value="" selected>Selecione</option>
+                    {% for tiporisco in tiporiscos %}
+                        <option value="{{ tiporisco.id }}">{{ tiporisco.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div> <!-- Final da div form2 -->
+
+    <!-- Botão Incluir -->
+    <div class="botoes mt-3">
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <span class="bi bi-plus-circle" style="font-size: 18px;"></span> Incluir
+            </button>
+        </div>
+    </div>
+
+    <!-- Mensagens de Alerta -->
+    {% if messages %}
+    <div class="alert alert-warning mt-3">
+        {% for m in messages %}
+            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</form>
+
+{% endblock %}

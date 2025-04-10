@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="titulo">ALTERAR SENHA</div>
+
+<!-- Formulário para alteração de senha -->
+<form name="form" id="form" class="form-horizontal" method="post" action="{% url 'alterar_senha' %}">
+    {% csrf_token %}
+    
+    <div class="form4">
+        <div class="form-group row">
+            <label for="nome" class="col-sm-2 col-form-label">&nbsp;</label>
+            <div class="col-sm-8">
+                {{ form | crispy }}  <!-- Exibe o formulário com crispy -->
+            </div>
+        </div>
+    </div> 
+
+    {% if messages %}
+    <div class="alert alert-warning">
+        {% for m in messages %}
+            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="botoes">
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <span class="glyphicon glyphicon-plus" 
+                      style="margin-left: 5px; margin-right: 5px; font-size: 18px; padding-bottom: 5px;">Alterar</span>
+            </button>                
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}
